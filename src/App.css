@@ -1,22 +1,236 @@
-.App {
-  text-align: center;
+body, form, div, p, h1, h2, h3, h4, h5, h6, dl, dt, dd, ul, ol, ul, li, pre, fieldset, input, blockquote, table, th, td, caption {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  font-size: 13px;
+  font-family: "맑은 고딕", "Malgun Gothic", "Arial";
+  color: #666;
 }
 
-.App-logo {
-  height: 40vmin;
+ul, ol, dl {
+  list-style: none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+a {
+  text-decoration: none;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  max-width: 2000px;
+  min-width: 320px;
+  background: #fff;
+}
+
+.top_nav {
+  height: 32px;
+  background: #222;
+}
+
+.top_nav_cont {
   display: flex;
-  flex-direction: column;
+  margin: 0 auto;
+  height: 100%;
+  max-width: 960px;
+  min-width: 320px;
+  font-size: 0.923em;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #09d3ac;
+.top_nav_cont li {
+  display: inline;
+  padding: 0 1.1em;
+}
+
+.top_nav_cont li:first-child {
+  padding-left: 0;
+}
+
+.top_nav_cont a {
+  color: #fff;
+}
+
+.top_head {
+  display: flex;
+  max-width: 960px;
+  min-width: 320px;
+  margin: 0 auto;
+  padding: 15px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.eshop_logo {
+  padding-top: 26px;
+}
+
+.search {
+  width: 300px;
+  height: 36px;
+  border: 2px solid #ffe600;
+}
+
+.search span img {
+  float: right;
+  height: 34px;
+}
+
+.nav {
+  height: 45px;
+  background: #e7e7e7;
+}
+
+.nav_cont {
+  display: flex;
+  height: 100%;
+  background: #e7e7e7;
+  max-width: 960px;
+  min-width: 320px;
+  margin: 0 auto;
+}
+
+.nav_cont ul {
+  max-width: 960px;
+  width: 100%;
+  line-height: 45px;
+}
+
+.nav_cont ul:first-child {
+  border-left: 1px solid #ccc;
+}
+
+.nav_cont li {
+  display: inline-block;
+  width: 14.2%;
+  line-height: 44px;
+  text-align: center;
+  border-right: 1px solid #ccc;  
+}
+
+.nav_cont a {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  color: #202020;
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+.nav_cont ul li a:hover {
+  background:#ffe600;
+}
+
+.content {  
+  height: 93%;
+  background: #ffffff;
+  margin-top: 20px;
+  margin-bottom: 80px;  
+}
+
+.content .main_banner {    
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.content .main_banner .main_bn {    
+  display: inline-block;
+  width: 75%;
+  height: 360px;
+  background: #666;
+  position: relative;
+  overflow: hidden;
+}
+
+.content .main_banner .main_bn img {
+  width: 720px;
+  height: 360px;
+}
+
+.content .main_banner .list_bn {    
+  display: inline-block;
+  width: 25%;
+  height: 360px;
+  background: #222;
+  padding: 25px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.content .main_banner .list_bn>div {    
+  position: absolute;
+  background: #141414;
+  width: 100%;
+  height: 25px;
+  padding: 3px 0 0;
+  cursor: pointer;
+}
+
+.content .main_banner .list_bn>div>img {
+  display: block;
+  margin: 0 auto;
+}
+
+.content .main_banner .list_bn .top {
+  top: 0;
+}
+
+.content .main_banner .list_bn .bottom {
+  bottom: 0;
+}
+
+.content .main_banner .list_bn ul {
+  background: #333333
+}
+
+.content .main_banner .list_bn ul li {
+  padding: 15px 10px;
+  letter-spacing: -0.03em;
+  font-size: 12px;
+  border-bottom: 1px #000 solid;
+  height: 62px;
+  cursor: pointer;
+}
+
+.content .main_banner .list_bn ul li:hover {
+  background: #fee600;
+}
+
+.content .main_banner .list_bn ul li:hover p {
+  color:  #000;
+}
+
+.content .main_banner .list_bn ul li p, span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.content .main_banner .list_bn ul li p {
+  color: #FFF;
+  font-weight: bold;
+}
+
+.content .main_banner .list_bn ul li span {
+  display: block;
+  color: #999;
+}
+
+.content .products {    
+  max-width: 960px;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+.content .products ul {
+  display: flex;
+  justify-content: space-between;
+}
+
+.content .products .product {
+  width: 225px;
+  height: 298px;
+  background: #000;
 }
