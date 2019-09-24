@@ -2,6 +2,7 @@ import React from 'react';
 
 export default class Banner extends React.Component {
   state = {
+    events: [],
     currentBannerId: '',
     currentBannerIndex: 0,
     slideWindowStartIndex: 0,
@@ -10,11 +11,25 @@ export default class Banner extends React.Component {
 
   bannerChangeInterval = null;
 
-  componentDidMount() {    
-    this.bannerChangeInterval = setInterval(()=>{
-      this.increaseCurrentBannerIndex();
-    }, 5000);    
-  }  
+  setEvents = () => {
+    fetch('http://localhost:5000/events')
+      .then(response => {
+        return response.json();
+      })
+      .then(json => {
+        this.setState(
+          { events: json },
+          () => {
+            this.bannerChangeInterval = setInterval(() => {
+              this.increaseCurrentBannerIndex();
+            }, 5000);
+          });
+      });
+  }
+
+  componentDidMount() {
+    this.setEvents();
+  }
 
   componentWillUnmount() {
     clearInterval(this.bannerChangeInterval);
@@ -22,7 +37,7 @@ export default class Banner extends React.Component {
 
   onClickBanner = (index) => {
     this.setState({
-      currentBannerId: this.props.bannerInfo[index].id,
+      currentBannerId: this.state.events[index].id,
       currentBannerIndex: index
     });
   }
@@ -30,29 +45,29 @@ export default class Banner extends React.Component {
   increaseCurrentBannerIndex = () => {
     const currentIndex = this.state.currentBannerIndex;
     let nextIndex = 0;
-    if (currentIndex + 1 < this.props.bannerInfo.length) {
+    if (currentIndex + 1 < this.state.events.length) {
       nextIndex = currentIndex + 1;
     }
 
     let slideWindowStartIndex = this.state.slideWindowStartIndex;
     let slideWindowEndIndex = this.state.slideWindowStartIndex + this.state.slideWindowSize - 1;
     if (nextIndex < slideWindowStartIndex) {
-      while(slideWindowEndIndex!==nextIndex && slideWindowStartIndex>0) {
+      while (slideWindowEndIndex !== nextIndex && slideWindowStartIndex > 0) {
         slideWindowStartIndex--;
         slideWindowEndIndex--;
-      }      
+      }
     }
     else if (nextIndex > slideWindowEndIndex) {
-      while(slideWindowStartIndex!==nextIndex && slideWindowEndIndex<this.props.bannerInfo.length-1) {
+      while (slideWindowStartIndex !== nextIndex && slideWindowEndIndex < this.state.events.length - 1) {
         slideWindowStartIndex++;
         slideWindowEndIndex++;
-      }      
+      }
     }
     else {
 
     }
 
-    const newCurrentBannerId = this.props.bannerInfo[nextIndex].id;
+    const newCurrentBannerId = this.state.events[nextIndex].id;
     this.setState(
       {
         currentBannerId: newCurrentBannerId,
@@ -67,7 +82,7 @@ export default class Banner extends React.Component {
 
   decreaseCurrentBannerIndex = () => {
     const currentIndex = this.state.currentBannerIndex;
-    let prevIndex = this.props.bannerInfo.length - 1;
+    let prevIndex = this.state.events.length - 1;
     if (currentIndex - 1 >= 0) {
       prevIndex = currentIndex - 1;
     }
@@ -75,22 +90,22 @@ export default class Banner extends React.Component {
     let slideWindowStartIndex = this.state.slideWindowStartIndex;
     let slideWindowEndIndex = this.state.slideWindowStartIndex + this.state.slideWindowSize - 1;
     if (prevIndex < slideWindowStartIndex) {
-      while(slideWindowEndIndex!==prevIndex && slideWindowStartIndex>0) {
+      while (slideWindowEndIndex !== prevIndex && slideWindowStartIndex > 0) {
         slideWindowStartIndex--;
         slideWindowEndIndex--;
-      }      
+      }
     }
     else if (prevIndex > slideWindowEndIndex) {
-      while(slideWindowStartIndex!==prevIndex && slideWindowEndIndex<this.props.bannerInfo.length-1) {
+      while (slideWindowStartIndex !== prevIndex && slideWindowEndIndex < this.state.events.length - 1) {
         slideWindowStartIndex++;
         slideWindowEndIndex++;
-      }      
+      }
     }
     else {
 
     }
 
-    const newCurrentBannerId = this.props.bannerInfo[prevIndex].id;
+    const newCurrentBannerId = this.state.events[prevIndex].id;
     this.setState(
       {
         currentBannerId: newCurrentBannerId,
@@ -103,8 +118,8 @@ export default class Banner extends React.Component {
     );
   }
 
-  render() {    
-    const bannerInfo = this.props.bannerInfo;
+  render() {
+    const bannerInfo = this.state.events;
     let bannerImgList = bannerInfo.map((item, index) => {
       let style = { display: 'none' };
       if (index === this.state.currentBannerIndex) {

@@ -21,8 +21,10 @@ db.once('open', () => {
 });
 
 const eventsRouter = require('./routes/events');
+const productsRouter = require('./routes/products');
 
 app.use('/events', eventsRouter);
+app.use('/products', productsRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
